@@ -5,4 +5,12 @@ COPY . /var/www/app
 
 WORKDIR /var/www/app
 RUN pip install -r requirements.txt
-CMD python manage.py runserver 0.0.0.0:$DJANGO_PORT
+
+COPY autostart.sh .
+RUN chmod a+x autostart.sh
+
+RUN apt-get update
+RUN apt-get install dos2unix
+RUN dos2unix autostart.sh
+
+ENTRYPOINT ["bash", "autostart.sh"]
