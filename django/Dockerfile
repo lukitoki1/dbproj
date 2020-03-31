@@ -1,11 +1,8 @@
 FROM python:latest
 
-ENV PYTHONUNBUFFERED 1
+ENV DJANGO_PORT 8000
+COPY . /var/www/app
 
-RUN mkdir /code
-WORKDIR /code
-
-COPY requirements.txt /code/
+WORKDIR /var/www/app
 RUN pip install -r requirements.txt
-
-COPY . /code/
+CMD python manage.py runserver 0.0.0.0:$DJANGO_PORT

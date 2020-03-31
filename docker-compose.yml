@@ -10,8 +10,6 @@ services:
   django:
     container_name: django_con
     build: ./django
-    volumes:
-      - .:/code
     ports:
       - "8000:8000"
     depends_on:
