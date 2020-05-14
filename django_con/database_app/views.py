@@ -6,6 +6,9 @@ from rest_framework import generics
 from .serializers import *
 from .models import *
 
+import logging
+logger = logging.getLogger(__name__)
+
 
 def index(request):
     return HttpResponse("Hello, world!")

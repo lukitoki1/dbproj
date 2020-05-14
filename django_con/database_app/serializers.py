@@ -79,11 +79,13 @@ class ThreadSerializer(serializers.ModelSerializer):
         if not cars:
             raise ValidationError(f"You don't own {attrs['brand']} branded car, so you can't discuss about it.")
 
-        attrs['timestamp'] = datetime.now()
+        attrs['timestamp'] = datetime.utcnow()
         return attrs
 
 
 class CommentSerializer(serializers.ModelSerializer):
+    timestamp = serializers.ReadOnlyField()
+
     class Meta:
         model = Comment
         fields = ('id', 'content', 'timestamp', 'thread', 'nick')
@@ -94,5 +96,5 @@ class CommentSerializer(serializers.ModelSerializer):
         if not cars:
             raise ValidationError(f"You don't own {brand} branded car, so you can't discuss about it.")
 
-        attrs['timestamp'] = datetime.now()
+        attrs['timestamp'] = datetime.utcnow()
         return attrs
