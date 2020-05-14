@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from rest_framework import viewsets
+from rest_framework import viewsets, mixins
+from rest_framework import generics
 
 from .serializers import *
 from .models import *
@@ -25,7 +26,10 @@ class CarViewSet(viewsets.ModelViewSet):
     serializer_class = CarSerializer
 
 
-class HashtagViewSet(viewsets.ModelViewSet):
+class HashtagViewSet(mixins.CreateModelMixin,
+                     mixins.RetrieveModelMixin,
+                     mixins.ListModelMixin,
+                     viewsets.GenericViewSet):
     queryset = Hashtag.objects.all().order_by('name')
     serializer_class = HashtagSerializer
 

@@ -3,13 +3,13 @@ version: "3.7"
 services:
   postgres:
     container_name: postgres_con
-    build: ./postgres
+    build: ./postgres_con
     ports:
       - "5432:5432"
 
   django:
     container_name: django_con
-    build: ./django
+    build: ./django_con
     ports:
       - "8000:8000"
     depends_on:
